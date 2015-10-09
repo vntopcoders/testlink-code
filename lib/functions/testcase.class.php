@@ -4968,7 +4968,30 @@ class testcase extends tlObjectWithAttachments
       $ret['status_ok']=0;
       $ret['id']=-1;
     }
+    $this->updateTCSummary($tcversion_id);
     return $ret;
+  }
+
+  /**
+  * Update Test case summary when add new step
+  * @param $tcversion_id: Int the test case id
+  * 
+  */
+  function updateTCSummary($tcversion_id)
+  {
+    $steps = $this->get_steps($tcversion_id);
+    $summary = "";
+    foreach ($steps as $step) {
+      if ($summary != "")
+        $summary .= "\n";
+      $summary .= $step["actions"];
+    }
+
+    $sql = " UPDATE {$this->tables['tcversions']} " .
+            " SET summary='" . $this->db->prepare_string($summary) . "'" .
+            " WHERE id = " . $this->db->prepare_int($tcversion_id); 
+    $this->db->exec_query($sql);
+
   }
 
   /**

@@ -696,3 +696,9 @@ CREATE TABLE /*prefix*/testcase_relations (
   `creation_ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8;
+
+CREATE TABLE /*prefix*/steps_template (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `step` text default '',
+  PRIMARY KEY  (`id`)
+) DEFAULT CHARSET=utf8;

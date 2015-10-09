@@ -706,7 +706,7 @@ class testcaseCommands
 
     $this->tcaseMgr->update_last_modified($argsObj->tcversion_id,$argsObj->user_id);
     $this->initTestCaseBasicInfo($argsObj,$guiObj);
-
+    $this->tcaseMgr->updateTCSummary($argsObj->tcversion_id);  
     $guiObj->tcversion_id = $argsObj->tcversion_id;
     $guiObj->step_id = $argsObj->step_id;
     $guiObj->step_number = $stepInfo['step_number'];
@@ -770,6 +770,8 @@ class testcaseCommands
     $guiObj->user_feedback = '';
     $op = $this->tcaseMgr->delete_step_by_id($argsObj->step_id);
     $this->tcaseMgr->update_last_modified($argsObj->tcversion_id,$argsObj->user_id);
+
+    $this->tcaseMgr->updateTCSummary($argsObj->tcversion_id);
 
     $this->initTestCaseBasicInfo($argsObj,$guiObj);
     return $guiObj;

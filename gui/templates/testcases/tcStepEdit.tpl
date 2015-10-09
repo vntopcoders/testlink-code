@@ -33,8 +33,9 @@ Purpose: create/edit test case step
 
 {include file="inc_head.tpl" openHead='yes' jsValidate="yes" editorType=$gui->editorType}
 {include file="inc_del_onclick.tpl"}
-
+    
 <script type="text/javascript" src="gui/javascript/ext_extensions.js" language="javascript"></script>
+<script type="text/javascript" language="javascript" src="{$basehref}/third_party/DataTables-1.10.4/media/js/jquery.js"></script>
 <script type="text/javascript">
 var warning_step_number = "{$labels.warning_step_number|escape:'javascript'}";
 var alert_box_title = "{$labels.warning|escape:'javascript'}";
@@ -70,6 +71,22 @@ function validateForm(the_form,step_set,step_number_on_edit)
   }
   return Ext.ux.requireSessionAndSubmit(the_form);
 }
+$( document ).ready(function() {
+  $("#add_to_step").click(function(){
+    $("#tc_steps").val($("#step_template").val());
+  });  
+
+});
+</script>
+
+<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+        $('.chosen').chosen({
+          placeholder_text_single: "Please Choose the Step"
+        });
+      });
 </script>
 
 {if $tlCfg->gui->checkNotSaved}
@@ -159,11 +176,7 @@ var tc_editor = "{$gui->editorType}";
        * results at approximately same size (step details get 45%
        * expected results get the rest)
        *}
-    <th width="45%">{$labels.step_actions}</th>
-      <th>{$labels.expected_results}</th>
-      {if $session['testprojectOptions']->automationEnabled}
-        <th width="25">{$labels.execution_type_short_descr}</th>
-      {/if}  
+    <th width="100%">{$labels.step_actions}</th>
     </tr>
   
   {* this means we have steps to display *}
@@ -175,7 +188,7 @@ var tc_editor = "{$gui->editorType}";
       <tr id="step_row_{$step_info.step_number}">
       {if $step_info.step_number == $gui->step_number}
       <td style="text-align:left;">{$gui->step_number}</td>
-        <td>{$steps}
+        <td colspan="3"><textarea name="steps" id="tc_steps" rows="8" cols="80">{$step_info.actions}</textarea>
       <div class="groupBtn">
         <input id="do_update_step" type="submit" name="do_update_step" 
                onclick="show_modified_warning=false; doAction.value='{$gui->operation}'" 
@@ -201,21 +214,11 @@ var tc_editor = "{$gui->editorType}";
     
 
         </td>
-        <td>{$expected_results}</td>
-        {if $session['testprojectOptions']->automationEnabled}
-        <td>
-          <select name="exec_type" onchange="content_modified = true">
-              {html_options options=$gui->execution_types selected=$gui->step_exec_type}
-          </select>
-          </td>
-          {/if}
+        <!--td>{$expected_results}</td-->
+        
       {else}
         <td style="text-align:left;"><a href="{$hrefEditStep}{$step_info.id}">{$step_info.step_number}</a></td>
         <td ><a href="{$hrefEditStep}{$step_info.id}">{$step_info.actions}</a></td>
-        <td ><a href="{$hrefEditStep}{$step_info.id}">{$step_info.expected_results}</a></td>
-        {if $session['testprojectOptions']->automationEnabled}
-          <td><a href="{$hrefEditStep}{$step_info.id}">{$gui->execution_types[$step_info.execution_type]}</a></td>
-        {/if}  
       {/if}
     {$rCount=$row+$step_info.step_number}
     {if ($rCount < $rowCount) && ($rowCount>=1)}
@@ -280,21 +283,30 @@ var tc_editor = "{$gui->editorType}";
       </tr>
     {/foreach}
   {/if}
-
   {if $gui->action == 'createStep' || $gui->action == 'doCreateStep'}
     {* We have forgotten to manage layout here *}
     {if $gui->steps_results_layout == "horizontal"}
       <tr id="new_step">
         <td style="text-align:left;">{$gui->step_number}</td>
-        <td>{$steps}</td>
-        <td>{$expected_results}</td>
-          {if $session['testprojectOptions']->automationEnabled}
-          <td>
-            <select name="exec_type" onchange="content_modified = true">
-                {html_options options=$gui->execution_types selected=$gui->step_exec_type}
-            </select>
-          </td>
-          {/if}
+        <td colspan="3">
+          <table>
+            <tr><td>
+            <select data-placeholder="Choose a Country" class="chosen" id="step_template">
+            {foreach from=$gui->stepsTemplate item=step}
+              <option value='{$step.step}'>{$step.step}</option>
+            {/foreach}
+            </select></td>
+            <td>
+            <input type="button" value="Add" id="add_to_step" name="add_to_step">
+            </td>
+            </tr>
+            <tr><td colspan="2">
+            <textarea name="steps" id="tc_steps" rows="8" cols="80"></textarea>
+            </td>
+            </tr>
+        </table>
+
+        </td>
       </tr>
     
     {else}
@@ -347,7 +359,6 @@ var tc_editor = "{$gui->editorType}";
            {else}  onclick="show_modified_warning=false; javascript:history.back();" {/if} />
   </div>  
 </form>
-
 </div>
 </body>
 </html>

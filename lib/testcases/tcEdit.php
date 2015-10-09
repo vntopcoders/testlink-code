@@ -29,7 +29,7 @@ $tcase_mgr = new testcase($db);
 $tproject_mgr = new testproject($db);
 $tree_mgr = new tree($db);
 $tsuite_mgr = new testsuite($db);
-
+$stepsTemplateObj = new steps($db);
 
 $args = init_args($cfg,$optionTransferName,$tcase_mgr);
 require_once(require_web_editor($cfg->webEditorCfg['type']));
@@ -46,6 +46,9 @@ $opt_cfg = initializeOptionTransferCfg($optionTransferName,$args,$tproject_mgr);
 $gui = initializeGui($db,$args,$cfg,$tcase_mgr);
 
 $smarty = new TLSmarty();
+
+$stepsTemplate = $stepsTemplateObj->get_steps();
+$gui->stepsTemplate = $stepsTemplate;
 
 $active_status = 0;
 $name_ok = 1;
@@ -449,9 +452,9 @@ function init_args(&$cfgObj,$otName,&$tcaseMgr)
 
 
   // Specialized webEditorConfiguration
-  $action2check = array("editStep" => true,"createStep" => true, "doCreateStep" => true,
-                        "doUpdateStep" => true, "doInsertStep" => true, 
-                        "doCopyStep" => true,"doUpdateStepAndInsert" => true);
+  $action2check = array("editStep" => false,"createStep" => false, "doCreateStep" => false,
+                        "doUpdateStep" => false, "doInsertStep" => false, 
+                        "doCopyStep" => false,"doUpdateStepAndInsert" => false);
   if( isset($action2check[$args->doAction]) )
   {
     $cfgObj->webEditorCfg = getWebEditorCfg('steps_design');  
