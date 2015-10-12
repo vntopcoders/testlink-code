@@ -225,7 +225,7 @@
        <a href="lib/results/tcCreatedPerUserOnTestProject.php?do_action=uinput&tproject_id={$gui->testprojectID}">{$labels.link_report_test_cases_created_per_user}</a>
      {/if}
         <br />
-        <a href="lib/testcases/tcStepsTemplate.php">Steps Template</a>
+        <a href="lib/testcases/tcStepsTemplate.php">Steps Definition Management</a>
     </div>
   {/if}
 
