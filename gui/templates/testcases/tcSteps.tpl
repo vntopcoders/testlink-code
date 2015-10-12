@@ -58,11 +58,11 @@ var del_action=fRoot+'{$deleteStepAction}';
   </tr>
 </table>
 </form>
-<form name="platformsExport" id="platformsExport" method="post" action="lib/testcases/stepsExport.php">
+<form name="platformsExport" id="stepsExport" method="post" action="lib/testcases/stepsExport.php">
         <input type="hidden" name="goback_url" value="{$gui.goback_url}">
       <input type="submit" name="export_steps" id="export_steps" style="margin-left: 3px;" value="Export">
                
-          <input type="button" name="import_platforms" id="import_platforms" onclick="location='http://testlink.dev/lib/platforms/platformsImport.php?goback_url={$gui.goback_url}'" value="Import">
+          <input type="button" name="import_steps" id="import_steps" onclick="location='http://testlink.dev/lib/testcases/stepsImport.php?goback_url={$gui.goback_url}'" value="Import">
                   </form>
 </div>
 </body>
