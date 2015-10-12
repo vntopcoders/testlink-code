@@ -57,7 +57,7 @@ viewer for test case in test specification
 	  <th class="bold" colspan="{$inc_tcbody_tableColspan}" style="text-align:left;">{$inc_tcbody_labels.summary}</td>
 	</tr>
 	<tr>
-		<td colspan="{$inc_tcbody_tableColspan}">{$inc_tcbody_testcase.summary}<p></td>
+		<td colspan="{$inc_tcbody_tableColspan}"><pre>{$inc_tcbody_testcase.summary}</pre><p></td>
 	</tr>
 
 	<tr>
