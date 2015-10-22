@@ -85,7 +85,7 @@ function oneZeroImageRenderer(val)
 
 function columnWrap(val)
 {
-  return '<div style="white-space:normal !important; -moz-user-select: text; -webkit-user-select: text;">'+ val +'</div>';
+  return '<div style="white-space:normal !important; -moz-user-select: text; -webkit-user-select: text;"><pre>'+ val +'</pre></div>';
 }
 
 // Functions for MultiSort
