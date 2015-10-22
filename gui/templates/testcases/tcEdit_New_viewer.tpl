@@ -45,7 +45,7 @@ Purpose: smarty template - create new testcase
     <p />
 
     <div class="labelHolder">{$labels.summary}</div>
-    <div>{$summary}</div>
+    <div><textarea rows="10" cols="60">{$gui->tc.summary|escape}</textarea></div>
     <br />
 
     <div class="labelHolder">{$labels.preconditions}</div>
