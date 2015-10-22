@@ -45,11 +45,11 @@ Purpose: smarty template - create new testcase
     <p />
 
     <div class="labelHolder">{$labels.summary}</div>
-    <div><textarea rows="10" cols="60">{$gui->tc.summary|escape}</textarea></div>
+    <div><textarea rows="10" cols="120">{$gui->tc.summary|escape}</textarea></div>
     <br />
 
     <div class="labelHolder">{$labels.preconditions}</div>
-    <div>{$preconditions}</div>
+    <div><textarea rows="10" cols="120">{$gui->tc.preconditions|escape}</textarea></div>
     
     {* Custom fields - with before steps & results location - 20090718 - franciscom *}
     <br />
