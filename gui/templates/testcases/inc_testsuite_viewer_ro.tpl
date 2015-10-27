@@ -13,7 +13,7 @@ $Id: inc_testsuite_viewer_ro.tpl,v 1.4 2010/01/02 18:19:34 franciscom Exp $
 		<td colspan="2">
 			<fieldset class="x-fieldset x-form-label-left">
 			<legend class="legend_container">{$labels.details}</legend>
-			{$gui->container_data.details}
+			<pre>{$gui->container_data.details}</pre>
 			</fieldset>
 		</td>
 	</tr>
