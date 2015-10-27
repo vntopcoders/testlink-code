@@ -14,5 +14,5 @@ $Id: inc_testsuite_viewer_rw.tpl
 <p>
 <div class="labelHolder"><label for="details">{lang_get s='details'}</label></div>
 <div>
-{$details}
+<textarea name="details" rows="15" cols="120">{$container_data["details"]|escape}</textarea>
 </div>
